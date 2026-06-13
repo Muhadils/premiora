@@ -12,7 +12,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="flex justify-center">
-          <Logo iconSize={32} />
+          <Logo textClassName="text-slate-900" />
         </div>
         
         <div className="bg-white p-8 shadow-sm rounded-2xl border border-slate-100">
