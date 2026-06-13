@@ -322,7 +322,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
               >
                 {product.faq && product.faq.length > 0 ? (
                   <Accordion type="single" collapsible className="space-y-2">
-                    {product.faq.map((item, i) => (
+                    {product.faq.map((item: any, i: number) => (
                       <AccordionItem
                         key={i}
                         value={`faq-${i}`}
