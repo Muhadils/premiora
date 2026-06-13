@@ -287,7 +287,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
                 animate={{ opacity: 1, y: 0 }}
                 className="space-y-3"
               >
-                {product.benefits?.map((benefit, i) => (
+                {product.benefits?.map((benefit: string, i: number) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
                     <span className="text-slate-600">{benefit}</span>
