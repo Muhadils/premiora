@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local documentation and setup
+AGENTS.md
+CLAUDE.md
+DEPLOYMENT_TUTORIAL.md
+midtrans-setup.md
+
+# Temporary or raw data files
+categories.txt
+premku_source.html
+scratch-categories.mjs
+test-midtrans.mjs
