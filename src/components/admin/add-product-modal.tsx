@@ -116,10 +116,10 @@ export function AddProductModal() {
           const fileData = new FormData();
           fileData.append("file", croppedBlob, `product-${Date.now()}.jpg`);
           const uploadRes = await uploadImage(fileData);
-          if (uploadRes.success) {
+          if (uploadRes.success && uploadRes.url) {
             imageUrl = uploadRes.url;
           } else {
-            throw new Error(uploadRes.message);
+            throw new Error(uploadRes.message || "Gagal mengunggah gambar");
           }
         }
 

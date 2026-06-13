@@ -70,6 +70,7 @@ export interface PremkuStatusResponse extends BasePremkuResponse {
 export interface PremkuProduct {
   id: number;
   name: string;
+  category?: string;
   description?: string;
   price: number;
   status: "available" | "unavailable";
@@ -78,7 +79,8 @@ export interface PremkuProduct {
 }
 
 export interface PremkuProductsResponse extends BasePremkuResponse {
-  products?: PremkuProduct[];
+  data?: PremkuProduct[];
+  products?: PremkuProduct[]; // Keep for backward compatibility if any
 }
 
 export interface PremkuStockResponse extends BasePremkuResponse {

@@ -8,24 +8,14 @@ function slugify(text: string) {
 
 export async function GET() {
   try {
-    const apiKey = process.env.SUPPLIER_API_KEY || "4d5a4961e662a95b91331e090ade15e5";
-    
-    const res = await fetch("https://premku.com/api/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ api_key: apiKey }),
-    });
-
-    const response = await res.json();
+    const response = await PremkuService.getProducts();
     
     if (!response.success || !response.data) {
       return NextResponse.json({ error: "Gagal mengambil produk dari Premku", details: response }, { status: 500 });
     }
 
     // Ambil daftar kategori unik dari respons API
-    const categoryNames = Array.from(new Set(response.data.map(p => p.category).filter(Boolean)));
+    const categoryNames = Array.from(new Set(response.data.map((p: any) => p.category).filter(Boolean)));
     const supabase = createAdminClient();
 
     const results = [];

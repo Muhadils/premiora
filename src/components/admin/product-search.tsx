@@ -3,7 +3,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useDebounce } from "@/lib/hooks/use-debounce"; // assuming this exists, if not I will just use setTimeout
 
 export function ProductSearch() {
   const router = useRouter();
