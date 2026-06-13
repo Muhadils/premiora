@@ -21,7 +21,7 @@ export default async function AdminRevenuePage({
     .select(`
       id, total, created_at,
       order_items (
-        id, price, quantity, subtotal,
+        id, product_name, price, quantity, subtotal,
         products ( supplier_price )
       )
     `)
@@ -74,7 +74,8 @@ export default async function AdminRevenuePage({
     order.order_items?.forEach((item: any) => {
       // Jika product masih ada dan memiliki supplier_price, gunakan itu.
       // Jika tidak, kita gunakan asumsi profit margin rata-rata (misal 10%) untuk fallback agar data tidak nol.
-      const supplierPrice = item.products?.supplier_price || (item.price * 0.9);
+      const product = Array.isArray(item.products) ? item.products[0] : item.products;
+      const supplierPrice = product?.supplier_price || (item.price * 0.9);
       orderSupplierCost += (supplierPrice * item.quantity);
     });
     totalSupplierCost += orderSupplierCost;
