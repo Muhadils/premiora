@@ -1,16 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Brain,
-  Palette,
-  Play,
-  Music,
-  Briefcase,
-  GraduationCap,
-  Shield,
-  Share2,
-} from "lucide-react";
+
 import {
   Brain,
   Palette,
