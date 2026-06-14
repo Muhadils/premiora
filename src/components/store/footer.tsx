@@ -47,7 +47,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm text-slate-500">
                 <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-400" />
-                <span>Indonesia</span>
+                <span>Indonesia, Sulawesi Selatan, Makassar</span>
               </div>
             </div>
           </div>
