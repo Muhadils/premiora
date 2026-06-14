@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ProductDetailClient } from "./product-detail-client";
+import { PremkuService } from "@/lib/supplier/premku.service";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -52,5 +53,37 @@ export default async function ProductDetailPage({ params }: Props) {
     .eq("is_active", true)
     .limit(4);
 
-  return <ProductDetailClient product={product} similarProducts={similarProducts || []} />;
+  // Fetch live supplier stock
+  let supplierProducts: any[] = [];
+  try {
+    const res = await PremkuService.getProducts();
+    if (res.success && res.products) {
+      supplierProducts = res.products;
+    }
+  } catch (error) {
+    console.error("Failed to fetch supplier products", error);
+  }
+
+  // Inject stock for main product
+  let finalProduct = { ...product };
+  if (finalProduct.supplier_product_code) {
+    const supplierData = supplierProducts.find(sp => String(sp.id) === finalProduct.supplier_product_code);
+    if (supplierData) {
+      finalProduct.stock = Number(supplierData.stock);
+    }
+  }
+
+  // Inject stock for similar products
+  const finalSimilarProducts = (similarProducts || []).map((prod) => {
+    const formattedProd = { ...prod, category: prod.categories || prod.category };
+    if (formattedProd.supplier_product_code) {
+      const supplierData = supplierProducts.find(sp => String(sp.id) === formattedProd.supplier_product_code);
+      if (supplierData) {
+        return { ...formattedProd, stock: Number(supplierData.stock) };
+      }
+    }
+    return formattedProd;
+  });
+
+  return <ProductDetailClient product={finalProduct} similarProducts={finalSimilarProducts} />;
 }
