@@ -45,7 +45,7 @@ export function HeroSection() {
         <div className="mx-auto max-w-4xl text-center px-4 sm:px-0">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
@@ -57,7 +57,7 @@ export function HeroSection() {
 
           {/* Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
@@ -71,7 +71,7 @@ export function HeroSection() {
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-lg"
@@ -83,7 +83,7 @@ export function HeroSection() {
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mt-8 sm:mt-10 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center"
@@ -106,7 +106,7 @@ export function HeroSection() {
 
           {/* Trust Indicators */}
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             className="mt-12 sm:mt-16 flex flex-wrap items-center justify-center gap-4 sm:gap-10"

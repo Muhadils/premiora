@@ -8,32 +8,32 @@ import React from "react";
 // ============================================
 
 export const fadeIn: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: { opacity: 1, transition: { duration: 0.5 } },
 };
 
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 1, y: 10 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 export const fadeInDown: Variants = {
-  hidden: { opacity: 0, y: -20 },
+  hidden: { opacity: 1, y: -10 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 export const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -20 },
+  hidden: { opacity: 1, x: -10 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
 };
 
 export const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 20 },
+  hidden: { opacity: 1, x: 10 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
 };
 
 export const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.95 },
+  hidden: { opacity: 1, scale: 0.98 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } },
 };
 
@@ -49,7 +49,7 @@ export const staggerContainer: Variants = {
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 1, y: 10 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
@@ -71,7 +71,7 @@ export function MotionDiv({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={variants}
       className={className}
       {...props}
@@ -92,7 +92,7 @@ export function MotionSection({
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={staggerContainer}
       className={className}
     >
