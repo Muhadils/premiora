@@ -89,9 +89,9 @@ export function ProductCard({ product, className }: ProductCardProps) {
             <Image
               src={product.thumbnail_url}
               alt={product.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 640px) 75px, 110px"
+              width={110}
+              height={110}
+              className="object-cover w-full h-full"
             />
           </div>
         ) : (

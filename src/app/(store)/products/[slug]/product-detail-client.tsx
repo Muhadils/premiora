@@ -86,7 +86,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Thumbnail */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 1, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             className="relative w-36 h-36 sm:w-full sm:h-auto sm:aspect-square mx-auto overflow-hidden rounded-2xl border border-slate-200 bg-slate-100"
@@ -123,7 +123,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
 
           {/* Product Info */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 1, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex flex-col"
@@ -270,9 +270,9 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
             {/* Description Tab */}
             {activeTab === "description" && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 1, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="prose prose-slate max-w-none"
+                className="prose prose-slate max-w-none text-slate-600"
               >
                 <p className="text-slate-600 leading-relaxed whitespace-pre-line">
                   {cleanDescription}
@@ -283,7 +283,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
             {/* Benefits Tab */}
             {activeTab === "benefits" && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 1, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="space-y-3"
               >
@@ -317,7 +317,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
             {/* FAQ Tab */}
             {activeTab === "faq" && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 1, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
                 {product.faq && product.faq.length > 0 ? (
@@ -346,7 +346,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
             {/* Reviews Tab */}
             {activeTab === "reviews" && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 1, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center py-12"
               >
@@ -383,7 +383,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
       {isTermsOpen && termsText && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 1, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col"
           >

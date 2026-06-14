@@ -11,7 +11,16 @@ import {
   Shield,
   Share2,
 } from "lucide-react";
-import { MotionSection, MotionStaggerItem } from "@/lib/motion";
+import {
+  Brain,
+  Palette,
+  Play,
+  Music,
+  Briefcase,
+  GraduationCap,
+  Shield,
+  Share2,
+} from "lucide-react";
 
 const iconMap: Record<string, React.ReactNode> = {
   Brain: <Brain className="h-5 w-5 sm:h-6 sm:w-6" />,
@@ -48,11 +57,11 @@ export function CategoryGrid({ counts }: { counts?: Record<string, number> }) {
           </p>
         </div>
 
-        <MotionSection className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:gap-4">
           {categories.map((cat) => {
             const productCount = counts?.[cat.slug] || 0;
             return (
-              <MotionStaggerItem key={cat.slug}>
+              <div key={cat.slug} className="animate-in fade-in slide-in-from-bottom-4 duration-700">
                 <Link
                   href={`/products?category=${cat.slug}`}
                   className="group relative flex flex-col items-center gap-2 sm:gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 text-center transition-all duration-300 hover:border-primary-200 hover:shadow-lg hover:shadow-primary-500/5 hover:-translate-y-1"
@@ -71,10 +80,10 @@ export function CategoryGrid({ counts }: { counts?: Record<string, number> }) {
                     </p>
                   </div>
                 </Link>
-              </MotionStaggerItem>
+              </div>
             );
           })}
-        </MotionSection>
+        </div>
       </div>
     </section>
   );
