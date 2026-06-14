@@ -49,6 +49,7 @@ export default async function ProductDetailPage({ params }: Props) {
     .select("*, category:categories(*)")
     .eq("category_id", product.category_id)
     .neq("id", product.id)
+    .eq("is_active", true)
     .limit(4);
 
   return <ProductDetailClient product={product} similarProducts={similarProducts || []} />;
