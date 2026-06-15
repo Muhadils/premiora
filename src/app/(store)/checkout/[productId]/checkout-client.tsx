@@ -99,7 +99,7 @@ export function CheckoutClient({ product }: Props) {
         data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
       />
 
-      <div className="pt-16 sm:pt-20 lg:pt-24 min-h-[90vh] bg-slate-50">
+      <div className="pt-24 sm:pt-28 lg:pt-32 min-h-[90vh] bg-slate-50">
         <div className="container-custom section">
           <div className="mx-auto max-w-4xl">
             {/* Header */}

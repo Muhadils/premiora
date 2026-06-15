@@ -38,7 +38,7 @@ export function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
+        isScrolled || pathname !== "/"
           ? "bg-gradient-to-r from-slate-950 via-blue-950/90 to-slate-950 backdrop-blur-md border-b border-blue-500/20 shadow-lg shadow-blue-900/10"
           : "bg-transparent"
       )}

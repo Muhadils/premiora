@@ -25,14 +25,14 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const categories = [
-  { name: "AI", slug: "ai", icon: "Brain", color: "from-violet-500 to-purple-600", count: 5 },
-  { name: "Design", slug: "design", icon: "Palette", color: "from-pink-500 to-rose-600", count: 4 },
-  { name: "Streaming", slug: "streaming", icon: "Play", color: "from-red-500 to-orange-600", count: 3 },
-  { name: "Music", slug: "music", icon: "Music", color: "from-emerald-500 to-green-600", count: 2 },
-  { name: "Productivity", slug: "productivity", icon: "Briefcase", color: "from-blue-500 to-indigo-600", count: 4 },
-  { name: "Education", slug: "education", icon: "GraduationCap", color: "from-amber-500 to-orange-600", count: 3 },
-  { name: "VPN", slug: "vpn", icon: "Shield", color: "from-cyan-500 to-teal-600", count: 2 },
-  { name: "Social Media", slug: "social-media", icon: "Share2", color: "from-fuchsia-500 to-pink-600", count: 2 },
+  { name: "AI", slug: "ai", icon: "Brain", color: "bg-violet-500 bg-gradient-to-br from-violet-500 to-purple-600", count: 5 },
+  { name: "Design", slug: "design", icon: "Palette", color: "bg-pink-500 bg-gradient-to-br from-pink-500 to-rose-600", count: 4 },
+  { name: "Streaming", slug: "streaming", icon: "Play", color: "bg-red-500 bg-gradient-to-br from-red-500 to-orange-600", count: 3 },
+  { name: "Music", slug: "music", icon: "Music", color: "bg-emerald-500 bg-gradient-to-br from-emerald-500 to-green-600", count: 2 },
+  { name: "Productivity", slug: "productivity", icon: "Briefcase", color: "bg-blue-500 bg-gradient-to-br from-blue-500 to-indigo-600", count: 4 },
+  { name: "Education", slug: "education", icon: "GraduationCap", color: "bg-amber-500 bg-gradient-to-br from-amber-500 to-orange-600", count: 3 },
+  { name: "VPN", slug: "vpn", icon: "Shield", color: "bg-cyan-500 bg-gradient-to-br from-cyan-500 to-teal-600", count: 2 },
+  { name: "Social Media", slug: "social-media", icon: "Share2", color: "bg-fuchsia-500 bg-gradient-to-br from-fuchsia-500 to-pink-600", count: 2 },
 ];
 
 export function CategoryGrid({ counts }: { counts?: Record<string, number> }) {
@@ -58,7 +58,7 @@ export function CategoryGrid({ counts }: { counts?: Record<string, number> }) {
                   className="group relative flex flex-col items-center gap-2 sm:gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 text-center transition-all duration-300 hover:border-primary-200 hover:shadow-lg hover:shadow-primary-500/5 hover:-translate-y-1"
                 >
                   <div
-                    className={`flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-xl sm:rounded-2xl bg-gradient-to-br ${cat.color} text-white shadow-md sm:shadow-lg transition-transform duration-300 group-hover:scale-110`}
+                    className={`mx-auto flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-xl sm:rounded-2xl ${cat.color} text-white shadow-md sm:shadow-lg transition-transform duration-300 group-hover:scale-110`}
                   >
                     {iconMap[cat.icon]}
                   </div>

@@ -67,7 +67,7 @@ export function ProductDetailClient({ product, similarProducts }: Props) {
   }
 
   return (
-    <div className="pt-16 sm:pt-20 lg:pt-24 pb-24 sm:pb-0">
+    <div className="pt-24 sm:pt-28 lg:pt-32 pb-24 sm:pb-0">
       <div className="container-custom section">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-sm text-slate-500 mb-6 sm:mb-8">
