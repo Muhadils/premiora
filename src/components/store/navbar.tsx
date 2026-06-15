@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Menu, X, Search, Package } from "lucide-react";
 import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
@@ -100,42 +100,34 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileOpen && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden border-t border-white/10 bg-slate-900 lg:hidden"
-          >
-            <div className="container-custom py-4 space-y-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "block rounded-lg px-4 py-3 text-sm font-medium transition-colors",
-                    pathname === link.href
-                      ? "bg-blue-500/10 text-blue-400"
-                      : "text-slate-300 hover:bg-white/5 hover:text-white"
-                  )}
-                >
-                  {link.label}
+      {isMobileOpen && (
+        <div className="overflow-hidden border-t border-white/10 bg-slate-900 lg:hidden">
+          <div className="container-custom py-4 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "block rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+                  pathname === link.href
+                    ? "bg-blue-500/10 text-blue-400"
+                    : "text-slate-300 hover:bg-white/5 hover:text-white"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="pt-3 border-t border-white/10">
+              <Button variant="outline" size="sm" className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10" asChild>
+                <Link href="/order">
+                  <Package className="h-4 w-4" />
+                  Lacak Order
                 </Link>
-              ))}
-              <div className="pt-3 border-t border-white/10">
-                <Button variant="outline" size="sm" className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10" asChild>
-                  <Link href="/order">
-                    <Package className="h-4 w-4" />
-                    Lacak Order
-                  </Link>
-                </Button>
-              </div>
+              </Button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
