@@ -20,17 +20,24 @@ export class DuitkuService {
 
     const payload = {
       merchantCode: this.merchantCode,
-      paymentAmount: params.paymentAmount,
+      paymentAmount: Math.round(Number(params.paymentAmount)),
+      paymentMethod: "",
       merchantOrderId: params.merchantOrderId,
       productDetails: params.productDetails,
+      additionalParam: "",
+      merchantUserInfo: "",
       email: params.email,
       phoneNumber: params.phoneNumber || "081234567890",
       customerVaName: params.customerVaName,
-      itemDetails: params.itemDetails,
+      itemDetails: params.itemDetails.map(item => ({
+        name: item.name,
+        price: Math.round(Number(item.price)),
+        quantity: Math.round(Number(item.quantity))
+      })),
       returnUrl: params.returnUrl,
       callbackUrl: params.callbackUrl,
       signature: signature,
-      expiryPeriod: params.expiryPeriod || 60, // 1 hour default
+      expiryPeriod: Math.round(Number(params.expiryPeriod || 60)),
     };
 
     try {
