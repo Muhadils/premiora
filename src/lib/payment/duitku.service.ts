@@ -7,8 +7,8 @@ export class DuitkuService {
   private static readonly apiKey = process.env.DUITKU_API_KEY || "";
   
   private static readonly baseUrl = DuitkuService.isProduction
-    ? "https://api-prod.duitku.com/api/merchant/createInvoice"
-    : "https://api-sandbox.duitku.com/api/merchant/createInvoice";
+    ? "https://api-prod.duitku.com/api/merchant/v2/inquiry"
+    : "https://api-sandbox.duitku.com/api/merchant/v2/inquiry";
 
   /**
    * Create a new invoice in Duitku and get the payment URL
@@ -21,6 +21,7 @@ export class DuitkuService {
     const payload = {
       merchantCode: this.merchantCode,
       paymentAmount: Math.round(Number(params.paymentAmount)),
+      paymentMethod: "VC", // VC = Credit Card, just for testing if v2/inquiry works
       merchantOrderId: params.merchantOrderId,
       productDetails: params.productDetails,
       email: params.email,
