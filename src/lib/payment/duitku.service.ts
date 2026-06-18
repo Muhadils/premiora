@@ -7,8 +7,8 @@ export class DuitkuService {
   private static readonly apiKey = process.env.DUITKU_API_KEY || "";
   
   private static readonly baseUrl = DuitkuService.isProduction
-    ? "https://api-prod.duitku.com/api/merchant/createInvoice"
-    : "https://api-sandbox.duitku.com/api/merchant/createInvoice";
+    ? "https://passport.duitku.com/webapi/api/merchant/v2/inquiry"
+    : "https://sandbox.duitku.com/webapi/api/merchant/v2/inquiry";
 
   /**
    * Create a new invoice in Duitku and get the payment URL
@@ -16,12 +16,13 @@ export class DuitkuService {
   static async createInvoice(params: DuitkuTransactionParams): Promise<DuitkuTransactionResponse> {
     const timestamp = Date.now();
     const signaturePlaintext = `${this.merchantCode}${params.merchantOrderId}${Math.round(Number(params.paymentAmount))}${this.apiKey}`;
-    // Coba gunakan SHA256 karena api-sandbox.duitku.com menolak MD5 dengan pesan "Unauthorized"
-    const signature = crypto.createHash("sha256").update(signaturePlaintext).digest("hex");
+    // Kembalikan ke MD5 karena sandbox.duitku.com terbukti menerima MD5 sebelumnya
+    const signature = crypto.createHash("md5").update(signaturePlaintext).digest("hex");
 
     const payload = {
       merchantCode: this.merchantCode,
       paymentAmount: Math.round(Number(params.paymentAmount)),
+      paymentMethod: "VC", // Wajib diisi untuk v2/inquiry. VC = Credit Card (hanya untuk tes)
       merchantOrderId: params.merchantOrderId,
       productDetails: params.productDetails,
       additionalParam: "",
