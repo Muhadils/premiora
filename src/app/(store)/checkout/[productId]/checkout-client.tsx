@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Script from "next/script";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
@@ -18,22 +18,13 @@ interface Props {
   product: Product;
 }
 
-// Ensure TypeScript knows about window.snap
-declare global {
-  interface Window {
-    snap: any;
-  }
-}
+
 
 export function CheckoutClient({ product }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
 
-  const isProduction = process.env.NEXT_PUBLIC_MIDTRANS_IS_PRODUCTION === "true";
-  const snapUrl = isProduction
-    ? "https://app.midtrans.com/snap/snap.js"
-    : "https://app.sandbox.midtrans.com/snap/snap.js";
 
   const {
     register,
@@ -55,36 +46,12 @@ export function CheckoutClient({ product }: Props) {
     try {
       const result = await createOrder(data);
 
-      if (!result.success || !result.token) {
+      if (!result.success || !result.redirectUrl) {
         throw new Error(result.error || "Gagal membuat transaksi");
       }
 
-      // Trigger Midtrans Snap popup
-      if (window.snap) {
-        window.snap.pay(result.token, {
-          onSuccess: function (result: any) {
-            router.push(`/payment/success?order_id=${result.order_id}`);
-          },
-          onPending: function (result: any) {
-            router.push(`/payment/pending?order_id=${result.order_id}`);
-          },
-          onError: function (result: any) {
-            setErrorMsg("Pembayaran gagal. Silakan coba lagi.");
-            setIsSubmitting(false);
-          },
-          onClose: function () {
-            setErrorMsg("Kamu menutup halaman pembayaran sebelum selesai.");
-            setIsSubmitting(false);
-          },
-        });
-      } else {
-        // Fallback to redirect URL if snap.js failed to load
-        if (result.redirectUrl) {
-          window.location.href = result.redirectUrl;
-        } else {
-          throw new Error("Sistem pembayaran sedang tidak tersedia.");
-        }
-      }
+      // Redirect to Duitku payment page
+      window.location.href = result.redirectUrl;
     } catch (err: any) {
       setErrorMsg(err.message || "Terjadi kesalahan. Silakan coba lagi.");
       setIsSubmitting(false);
@@ -93,11 +60,7 @@ export function CheckoutClient({ product }: Props) {
 
   return (
     <>
-      <Script
-        src={snapUrl}
-        strategy="lazyOnload"
-        data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
-      />
+
 
       <div className="pt-24 sm:pt-28 lg:pt-32 min-h-[90vh] bg-slate-50">
         <div className="container-custom section">
@@ -276,7 +239,7 @@ export function CheckoutClient({ product }: Props) {
 
                   <div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500">
                     <Shield className="h-4 w-4 text-emerald-500" />
-                    <span>Pembayaran aman & terenkripsi oleh Midtrans</span>
+                    <span>Pembayaran aman & terenkripsi oleh Duitku</span>
                   </div>
                 </div>
               </div>

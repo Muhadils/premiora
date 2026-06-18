@@ -2,7 +2,7 @@
 
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { checkoutSchema, type CheckoutInput } from "@/lib/validators/checkout.schema";
-import { MidtransService } from "@/lib/payment/midtrans.service";
+import { DuitkuService } from "@/lib/payment/duitku.service";
 import { generateInvoiceId, formatWhatsApp } from "@/lib/utils/format";
 import { siteConfig } from "@/config/site";
 
@@ -96,48 +96,40 @@ export async function createOrder(data: CheckoutInput) {
 
     if (itemError) throw new Error("Gagal menyimpan detail produk");
 
-    // 9. Get Midtrans Snap Token
-    const midtransParams = {
-      transaction_details: {
-        order_id: invoiceId, // We use invoiceId as the Midtrans order_id
-        gross_amount: grossAmount,
-      },
-      customer_details: {
-        first_name: parsedData.name,
-        email: parsedData.email || "",
-        phone: whatsapp,
-      },
-      item_details: [
+    // 9. Get Duitku Payment URL
+    const duitkuParams = {
+      merchantOrderId: invoiceId,
+      paymentAmount: grossAmount,
+      productDetails: product.name,
+      email: parsedData.email || "",
+      phoneNumber: whatsapp,
+      customerVaName: parsedData.name,
+      itemDetails: [
         {
-          id: product.id,
+          name: product.name,
           price: product.selling_price,
           quantity: 1,
-          name: product.name.substring(0, 50), // Midtrans max length is 50
         },
       ],
-      callbacks: {
-        finish: `${siteConfig.url}/payment/success?order_id=${invoiceId}`,
-        error: `${siteConfig.url}/payment/error?order_id=${invoiceId}`,
-        pending: `${siteConfig.url}/payment/pending?order_id=${invoiceId}`,
-      }
+      returnUrl: `${siteConfig.url}/payment/success?order_id=${invoiceId}`,
+      callbackUrl: `${siteConfig.url}/api/webhook/duitku`,
     };
 
-    const midtransRes = await MidtransService.createTransaction(midtransParams);
+    const duitkuRes = await DuitkuService.createInvoice(duitkuParams);
 
     // 10. Save Payment intent
     await supabase.from("payments").insert({
       order_id: order.id,
-      gateway: "midtrans",
+      gateway: "duitku",
       status: "pending",
       gross_amount: grossAmount,
-      raw_response: { payment_url: midtransRes.redirect_url, token: midtransRes.token }
+      raw_response: { payment_url: duitkuRes.paymentUrl, reference: duitkuRes.reference }
     });
 
     return {
       success: true,
       invoiceId,
-      token: midtransRes.token,
-      redirectUrl: midtransRes.redirect_url,
+      redirectUrl: duitkuRes.paymentUrl,
     };
   } catch (error) {
     console.error("Order error:", error);
