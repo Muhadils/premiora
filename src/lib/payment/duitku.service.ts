@@ -7,8 +7,8 @@ export class DuitkuService {
   private static readonly apiKey = process.env.DUITKU_API_KEY || "";
   
   private static readonly baseUrl = DuitkuService.isProduction
-    ? "https://api-prod.duitku.com/webapi/api/merchant/v2/inquiry"
-    : "https://api-sandbox.duitku.com/webapi/api/merchant/v2/inquiry";
+    ? "https://passport.duitku.com/webapi/api/merchant/v2/inquiry"
+    : "https://sandbox.duitku.com/webapi/api/merchant/v2/inquiry";
 
   /**
    * Create a new invoice in Duitku and get the payment URL
@@ -42,7 +42,14 @@ export class DuitkuService {
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error("Duitku non-JSON response:", text);
+        throw new Error(`Invalid response from Duitku (HTTP ${response.status})`);
+      }
       
       if (data.statusCode !== "00" && data.statusCode !== "01" && data.statusCode !== "02") {
          console.error("Duitku Error API Response:", data);
