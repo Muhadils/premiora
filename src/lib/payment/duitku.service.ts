@@ -7,8 +7,8 @@ export class DuitkuService {
   private static readonly apiKey = process.env.DUITKU_API_KEY || "";
   
   private static readonly baseUrl = DuitkuService.isProduction
-    ? "https://passport.duitku.com/webapi/api/merchant/v2/inquiry"
-    : "https://sandbox.duitku.com/webapi/api/merchant/v2/inquiry";
+    ? "https://api-prod.duitku.com/api/merchant/createInvoice"
+    : "https://api-sandbox.duitku.com/api/merchant/createInvoice";
 
   /**
    * Create a new invoice in Duitku and get the payment URL
