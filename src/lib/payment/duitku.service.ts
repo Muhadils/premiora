@@ -7,8 +7,8 @@ export class DuitkuService {
   private static readonly apiKey = process.env.DUITKU_API_KEY || "";
   
   private static readonly baseUrl = DuitkuService.isProduction
-    ? "https://passport.duitku.com/webapi/api/merchant/v2/inquiry"
-    : "https://sandbox.duitku.com/webapi/api/merchant/v2/inquiry";
+    ? "https://api-prod.duitku.com/webapi/api/merchant/v2/inquiry"
+    : "https://api-sandbox.duitku.com/webapi/api/merchant/v2/inquiry";
 
   /**
    * Create a new invoice in Duitku and get the payment URL
@@ -46,7 +46,8 @@ export class DuitkuService {
       
       if (data.statusCode !== "00" && data.statusCode !== "01" && data.statusCode !== "02") {
          console.error("Duitku Error API Response:", data);
-         throw new Error(data.statusMessage || "Failed to create invoice");
+         const errorMsg = data.statusMessage || data.Message || JSON.stringify(data);
+         throw new Error(`Duitku Error: ${errorMsg}`);
       }
 
       return data as DuitkuTransactionResponse;
