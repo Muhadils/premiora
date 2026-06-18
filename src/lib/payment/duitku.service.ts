@@ -7,8 +7,8 @@ export class DuitkuService {
   private static readonly apiKey = process.env.DUITKU_API_KEY || "";
   
   private static readonly baseUrl = DuitkuService.isProduction
-    ? "https://passport.duitku.com/webapi/api/merchant/createInvoice"
-    : "https://sandbox.duitku.com/webapi/api/merchant/createInvoice";
+    ? "https://api-prod.duitku.com/api/merchant/createInvoice"
+    : "https://api-sandbox.duitku.com/api/merchant/createInvoice";
 
   /**
    * Create a new invoice in Duitku and get the payment URL
@@ -21,23 +21,14 @@ export class DuitkuService {
     const payload = {
       merchantCode: this.merchantCode,
       paymentAmount: Math.round(Number(params.paymentAmount)),
-      paymentMethod: "",
       merchantOrderId: params.merchantOrderId,
       productDetails: params.productDetails,
-      additionalParam: "",
-      merchantUserInfo: "",
       email: params.email,
       phoneNumber: params.phoneNumber || "081234567890",
-      customerVaName: params.customerVaName,
-      itemDetails: params.itemDetails.map(item => ({
-        name: item.name,
-        price: Math.round(Number(item.price)),
-        quantity: Math.round(Number(item.quantity))
-      })),
+      customerVaName: params.customerVaName || "Customer",
       returnUrl: params.returnUrl,
       callbackUrl: params.callbackUrl,
       signature: signature,
-      expiryPeriod: Math.round(Number(params.expiryPeriod || 60)),
     };
 
     try {
