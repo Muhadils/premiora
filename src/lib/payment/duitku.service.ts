@@ -7,8 +7,8 @@ export class DuitkuService {
   private static readonly apiKey = process.env.DUITKU_API_KEY || "";
   
   private static readonly baseUrl = DuitkuService.isProduction
-    ? "https://passport.duitku.com/webapi/api/merchant/createInvoice"
-    : "https://sandbox.duitku.com/webapi/api/merchant/createInvoice";
+    ? "https://api-prod.duitku.com/api/merchant/createInvoice"
+    : "https://api-sandbox.duitku.com/api/merchant/createInvoice";
 
   /**
    * Create a new invoice in Duitku and get the payment URL
@@ -23,9 +23,16 @@ export class DuitkuService {
       paymentAmount: Math.round(Number(params.paymentAmount)),
       merchantOrderId: params.merchantOrderId,
       productDetails: params.productDetails,
+      additionalParam: "",
+      merchantUserInfo: "",
       email: params.email,
       phoneNumber: params.phoneNumber || "081234567890",
       customerVaName: params.customerVaName || "Customer",
+      itemDetails: params.itemDetails.map(item => ({
+        name: item.name,
+        price: Math.round(Number(item.price)),
+        quantity: Math.round(Number(item.quantity))
+      })),
       returnUrl: params.returnUrl,
       callbackUrl: params.callbackUrl,
       signature: signature,
@@ -36,7 +43,9 @@ export class DuitkuService {
       const response = await fetch(this.baseUrl, {
         method: "POST",
         headers: {
+          "Accept": "application/json",
           "Content-Type": "application/json",
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         },
         body: JSON.stringify(payload),
       });
