@@ -15,8 +15,9 @@ export class DuitkuService {
    */
   static async createInvoice(params: DuitkuTransactionParams): Promise<DuitkuTransactionResponse> {
     const timestamp = Date.now();
-    const signaturePlaintext = `${this.merchantCode}${params.merchantOrderId}${params.paymentAmount}${this.apiKey}`;
-    const signature = crypto.createHash("md5").update(signaturePlaintext).digest("hex");
+    const signaturePlaintext = `${this.merchantCode}${params.merchantOrderId}${Math.round(Number(params.paymentAmount))}${this.apiKey}`;
+    // Coba gunakan SHA256 karena api-sandbox.duitku.com menolak MD5 dengan pesan "Unauthorized"
+    const signature = crypto.createHash("sha256").update(signaturePlaintext).digest("hex");
 
     const payload = {
       merchantCode: this.merchantCode,
