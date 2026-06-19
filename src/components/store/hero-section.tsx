@@ -84,20 +84,6 @@ export function HeroSection() {
             </form>
           </div>
 
-          {/* Categories / Quick Filters */}
-          <div
-            className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2 sm:gap-3 animate-[fade-in-up_0.5s_ease-out_0.4s_both]"
-          >
-            <Link href="/products" className="px-5 py-2 rounded-full bg-primary-600 text-white text-xs sm:text-sm font-medium shadow-md shadow-primary-500/20 hover:bg-primary-700 transition-colors">
-              Semua Produk
-            </Link>
-            {CATEGORIES.slice(0, 3).map((cat) => (
-              <Link key={cat.slug} href={`/products?category=${cat.slug}`} className="px-5 py-2 rounded-full bg-white border border-slate-200 text-slate-600 text-xs sm:text-sm font-medium hover:border-primary-200 hover:text-primary-600 transition-colors shadow-sm">
-                {cat.name}
-              </Link>
-            ))}
-          </div>
-
         </div>
       </div>
     </section>
