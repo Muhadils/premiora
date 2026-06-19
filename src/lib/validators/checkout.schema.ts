@@ -9,6 +9,7 @@ export const checkoutSchema = z.object({
   email: z.string().email("Format email tidak valid (harus berisi @)"),
   dynamic_fields: z.record(z.string(), z.string()).optional(),
   product_id: z.string().min(1, "Produk tidak valid"),
+  payment_method: z.string().min(2, "Silakan pilih metode pembayaran"),
 });
 
 export type CheckoutInput = z.infer<typeof checkoutSchema>;

@@ -100,6 +100,7 @@ export async function createOrder(data: CheckoutInput) {
     const duitkuParams = {
       merchantOrderId: invoiceId,
       paymentAmount: grossAmount,
+      paymentMethod: parsedData.payment_method,
       productDetails: product.name,
       email: parsedData.email || "",
       phoneNumber: whatsapp,

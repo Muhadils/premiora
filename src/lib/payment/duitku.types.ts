@@ -11,6 +11,7 @@ export interface DuitkuTransactionParams {
   email: string;
   phoneNumber?: string;
   customerVaName: string;
+  paymentMethod?: string;
   itemDetails: DuitkuItemDetails[];
   returnUrl: string;
   callbackUrl: string;

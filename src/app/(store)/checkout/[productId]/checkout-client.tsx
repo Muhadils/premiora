@@ -14,6 +14,17 @@ import { createOrder } from "@/lib/actions/order.actions";
 import { formatRupiah } from "@/lib/utils/format";
 import type { Product } from "@/types";
 
+const PAYMENT_METHODS = [
+  { id: "NQ", name: "QRIS", group: "E-Wallet & QRIS" },
+  { id: "SP", name: "ShopeePay", group: "E-Wallet & QRIS" },
+  { id: "OV", name: "OVO", group: "E-Wallet & QRIS" },
+  { id: "DA", name: "DANA", group: "E-Wallet & QRIS" },
+  { id: "BC", name: "BCA Virtual Account", group: "Virtual Account" },
+  { id: "M2", name: "Mandiri Virtual Account", group: "Virtual Account" },
+  { id: "BR", name: "BRI Virtual Account", group: "Virtual Account" },
+  { id: "I1", name: "BNI Virtual Account", group: "Virtual Account" },
+];
+
 interface Props {
   product: Product;
 }
@@ -175,6 +186,73 @@ export function CheckoutClient({ product }: Props) {
                       </div>
                     </div>
                   )}
+
+                  {/* Payment Methods */}
+                  <div className="rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm">
+                    <h2 className="mb-4 text-base sm:text-lg font-semibold text-slate-900">
+                      {product.dynamic_fields && product.dynamic_fields.length > 0 ? "3. Metode Pembayaran" : "2. Metode Pembayaran"}
+                    </h2>
+                    
+                    <div className="space-y-4">
+                      {/* E-Wallet */}
+                      <div>
+                        <h3 className="mb-2 text-xs sm:text-sm font-medium text-slate-500">E-Wallet & QRIS</h3>
+                        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                          {PAYMENT_METHODS.filter((m) => m.group === "E-Wallet & QRIS").map((method) => (
+                            <label
+                              key={method.id}
+                              className="relative flex cursor-pointer rounded-lg border bg-white p-3 shadow-sm focus-within:ring-2 focus-within:ring-primary-500 has-[:checked]:border-primary-500 has-[:checked]:bg-primary-50 has-[:checked]:ring-1 has-[:checked]:ring-primary-500 hover:border-slate-300"
+                            >
+                              <div className="flex w-full items-center justify-between">
+                                <div className="flex items-center">
+                                  <div className="text-sm">
+                                    <p className="font-medium text-slate-900">{method.name}</p>
+                                  </div>
+                                </div>
+                                <input
+                                  type="radio"
+                                  value={method.id}
+                                  {...register("payment_method")}
+                                  className="h-4 w-4 border-slate-300 text-primary-600 focus:ring-primary-600"
+                                />
+                              </div>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Virtual Account */}
+                      <div className="pt-2">
+                        <h3 className="mb-2 text-xs sm:text-sm font-medium text-slate-500">Virtual Account Bank</h3>
+                        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                          {PAYMENT_METHODS.filter((m) => m.group === "Virtual Account").map((method) => (
+                            <label
+                              key={method.id}
+                              className="relative flex cursor-pointer rounded-lg border bg-white p-3 shadow-sm focus-within:ring-2 focus-within:ring-primary-500 has-[:checked]:border-primary-500 has-[:checked]:bg-primary-50 has-[:checked]:ring-1 has-[:checked]:ring-primary-500 hover:border-slate-300"
+                            >
+                              <div className="flex w-full items-center justify-between">
+                                <div className="flex items-center">
+                                  <div className="text-sm">
+                                    <p className="font-medium text-slate-900">{method.name}</p>
+                                  </div>
+                                </div>
+                                <input
+                                  type="radio"
+                                  value={method.id}
+                                  {...register("payment_method")}
+                                  className="h-4 w-4 border-slate-300 text-primary-600 focus:ring-primary-600"
+                                />
+                              </div>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      {errors.payment_method && (
+                        <p className="mt-2 text-xs sm:text-sm text-red-500">{errors.payment_method.message}</p>
+                      )}
+                    </div>
+                  </div>
                 </form>
               </div>
 

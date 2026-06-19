@@ -22,7 +22,7 @@ export class DuitkuService {
     const payload = {
       merchantCode: this.merchantCode,
       paymentAmount: Math.round(Number(params.paymentAmount)),
-      paymentMethod: "VC", // Wajib diisi untuk v2/inquiry. VC = Credit Card (hanya untuk tes)
+      paymentMethod: params.paymentMethod || "VC", // Gunakan metode pembayaran dari pengguna
       merchantOrderId: params.merchantOrderId,
       productDetails: params.productDetails,
       additionalParam: "",
