@@ -268,6 +268,7 @@ export function CheckoutClient({ product }: Props) {
                           src={product.thumbnail_url}
                           alt={product.name}
                           fill
+                          sizes="(max-width: 640px) 48px, 64px"
                           className="object-cover"
                         />
                       )}
