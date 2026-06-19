@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Search, Receipt, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/lib/utils/constants";
@@ -33,25 +32,17 @@ export function HeroSection() {
         <div className="mx-auto max-w-5xl text-center px-4 sm:px-0">
           
           {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex justify-center mb-6 sm:mb-8"
-          >
+          <div className="flex justify-center mb-6 sm:mb-8 animate-[fade-in-up_0.5s_ease-out]">
             <div className="relative isolate overflow-hidden inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs font-semibold text-emerald-700 shadow-sm" style={{ WebkitTransform: "translateZ(0)" }}>
               <div className="absolute inset-0 animate-shimmer pointer-events-none -z-10" />
               <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               <span className="tracking-wider uppercase relative z-10">VERIFIED DIGITAL STORE</span>
             </div>
-          </motion.div>
+          </div>
 
           {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl"
+          <h1
+            className="text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl animate-[fade-in-up_0.5s_ease-out_0.1s_both]"
             style={{ WebkitFontSmoothing: "antialiased" }}
           >
             Akses Akun Premium,
@@ -59,24 +50,18 @@ export function HeroSection() {
             <span className="inline-block bg-gradient-to-r from-primary-600 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-1" style={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Instan & Bergaransi.
             </span>
-          </motion.h1>
+          </h1>
 
           {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm leading-relaxed text-slate-500 sm:text-lg"
+          <p
+            className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm leading-relaxed text-slate-500 sm:text-lg animate-[fade-in-up_0.5s_ease-out_0.2s_both]"
           >
             Nikmati layanan digital dengan harga Terbaik. <strong>Otomatis, cepat, dan bergaransi.</strong> Pilihan cerdas buat dipakai sendiri atau dijual lagi.
-          </motion.p>
+          </p>
 
           {/* Smart Search Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-8 sm:mt-12 max-w-xl mx-auto"
+          <div
+            className="mt-8 sm:mt-12 max-w-xl mx-auto animate-[fade-in-up_0.5s_ease-out_0.3s_both]"
           >
             <form onSubmit={handleSearch} className="bg-white rounded-2xl sm:rounded-full p-2 sm:p-2.5 shadow-xl shadow-slate-200/50 border border-slate-200 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 relative z-20">
               
@@ -97,14 +82,11 @@ export function HeroSection() {
                 Cek Status
               </Button>
             </form>
-          </motion.div>
+          </div>
 
           {/* Categories / Quick Filters */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2 sm:gap-3"
+          <div
+            className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2 sm:gap-3 animate-[fade-in-up_0.5s_ease-out_0.4s_both]"
           >
             <Link href="/products" className="px-5 py-2 rounded-full bg-primary-600 text-white text-xs sm:text-sm font-medium shadow-md shadow-primary-500/20 hover:bg-primary-700 transition-colors">
               Semua Produk
@@ -114,7 +96,7 @@ export function HeroSection() {
                 {cat.name}
               </Link>
             ))}
-          </motion.div>
+          </div>
 
         </div>
       </div>
