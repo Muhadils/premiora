@@ -44,17 +44,6 @@ export async function POST(req: Request) {
         console.error(`Failed to approve order ${orderId}:`, res.error);
         return NextResponse.json({ message: "Failed to process order" }, { status: 500 });
       }
-      
-      // Also update the payments table status
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY!
-      );
-      
-      await supabase
-        .from("payments")
-        .update({ status: "settlement" })
-        .eq("order_id", orderId);
         
       return NextResponse.json({ message: "Success" }, { status: 200 });
     }

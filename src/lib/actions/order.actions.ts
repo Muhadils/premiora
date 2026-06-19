@@ -148,19 +148,19 @@ export async function approveOrderManually(orderId: string) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-    // 1. Get Order
+    // 1. Get Order using invoice_id instead of id
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .select("id, status, invoice_id")
-      .eq("id", orderId)
+      .eq("invoice_id", orderId)
       .single();
 
     if (orderError || !order) throw new Error("Order not found");
     if (order.status !== "pending_payment") throw new Error("Order is not pending");
 
     // 2. Update Order Status
-    await supabase.from("orders").update({ status: "processing", paid_at: new Date().toISOString() }).eq("id", orderId);
-    await supabase.from("payments").update({ status: "success", paid_at: new Date().toISOString() }).eq("order_id", orderId);
+    await supabase.from("orders").update({ status: "processing", paid_at: new Date().toISOString() }).eq("invoice_id", orderId);
+    await supabase.from("payments").update({ status: "success", paid_at: new Date().toISOString() }).eq("order_id", order.id);
 
     // 3. Trigger Premku API (Auto Process)
     const { data: settingData } = await supabase.from("settings").select("value").eq("key", "auto_process_order").single();
