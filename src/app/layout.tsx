@@ -51,6 +51,7 @@ export default function RootLayout({
     <html
       lang="id"
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
