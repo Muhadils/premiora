@@ -47,7 +47,7 @@ export function HeroSection() {
           >
             Akses Akun Premium,
             <br className="hidden sm:block" />{" "}
-            <span className="inline-block bg-gradient-to-r from-primary-600 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-1" style={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span className="text-gradient-hero pb-1">
               Instan & Bergaransi.
             </span>
           </h1>

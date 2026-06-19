@@ -20,7 +20,7 @@ export function Logo({ className, textClassName = "text-white" }: LogoProps) {
         unoptimized
       />
       <span className={cn("text-xl font-bold tracking-tight", textClassName)}>
-        Premi<span className="bg-gradient-to-r from-blue-500 to-primary-500 bg-clip-text text-transparent">ora</span>
+        Premi<span className="text-gradient-logo">ora</span>
       </span>
     </Link>
   );
