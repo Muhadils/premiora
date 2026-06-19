@@ -39,8 +39,8 @@ export function HeroSection() {
             transition={{ duration: 0.5 }}
             className="flex justify-center mb-6 sm:mb-8"
           >
-            <div className="relative overflow-hidden inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs font-semibold text-emerald-700 shadow-sm">
-              <div className="absolute inset-0 animate-shimmer pointer-events-none" />
+            <div className="relative isolate overflow-hidden inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs font-semibold text-emerald-700 shadow-sm" style={{ WebkitTransform: "translateZ(0)" }}>
+              <div className="absolute inset-0 animate-shimmer pointer-events-none -z-10" />
               <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               <span className="tracking-wider uppercase relative z-10">VERIFIED DIGITAL STORE</span>
             </div>
@@ -52,10 +52,11 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl"
+            style={{ WebkitFontSmoothing: "antialiased" }}
           >
             Akses Akun Premium,
             <br className="hidden sm:block" />{" "}
-            <span className="bg-gradient-to-r from-primary-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="inline-block bg-gradient-to-r from-primary-600 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-1" style={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Instan & Bergaransi.
             </span>
           </motion.h1>
