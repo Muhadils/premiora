@@ -145,10 +145,23 @@ body {
 
 .bg-dots-slate {
   background-image: radial-gradient(
-    rgba(148, 163, 184, 0.25) 1.5px,
+    rgba(148, 163, 184, 0.3) 1.5px,
     transparent 1.5px
   );
   background-size: 32px 32px;
+}
+
+@keyframes grid-pan {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+.bg-grid-animated {
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: grid-pan 15s linear infinite;
 }
 
 /* ============================================
